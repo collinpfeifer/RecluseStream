@@ -1,0 +1,14 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "Backend API for recluse streams",
+  "main": "index.js",
+  "scripts": {
+    "start" : "json-server -p 3001 -w db.json"
+  },
+  "author": "Collin Pfeifer",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.16.3"
+  }
+}
