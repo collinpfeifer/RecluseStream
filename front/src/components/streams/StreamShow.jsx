@@ -1,11 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import flv from 'flv.js';
 import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
 
 const StreamShow = ({ match, fetchStream, stream }) => {
+  const videoStream = useRef(null);
+  let player = null;
+
   useEffect(() => {
     fetchStream(match.params.id);
+    buildPlayer();
   }, []);
+
+  useEffect(() => {
+    buildPlayer();
+  }, [stream]);
+
+  const buildPlayer = () => {
+    if (player || !stream) {
+      return;
+    }
+
+    player = flv.createPlayer({
+      type: 'flv',
+      url: `http://localhost:8000/live/${match.params.id}.flv`,
+    });
+    player.attachMediaElement(videoStream.current);
+    player.load();
+  };
 
   const renderContent = () => {
     if (!stream) {
@@ -19,6 +41,7 @@ const StreamShow = ({ match, fetchStream, stream }) => {
     }
     return (
       <div>
+        <video ref={videoStream} style={{ width: '90%' }} controls />
         <h1>{stream.title}</h1>
         <h5>{stream.description}</h5>
       </div>
