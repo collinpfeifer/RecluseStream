@@ -12,8 +12,14 @@ const StreamList = ({ fetchStreams, streams, currentUserId, isSignedIn }) => {
     if (stream.userId === currentUserId) {
       return (
         <div className='right floated content'>
-          <Link to={`/streams/edit/${stream.id}`} className='ui button primary'>Edit</Link>
-          <Link to={`/streams/delete/${stream.id}`} className='ui button negative'>Delete</Link>
+          <Link to={`/streams/edit/${stream.id}`} className='ui button primary'>
+            Edit
+          </Link>
+          <Link
+            to={`/streams/delete/${stream.id}`}
+            className='ui button negative'>
+            Delete
+          </Link>
         </div>
       );
     }
@@ -39,7 +45,7 @@ const StreamList = ({ fetchStreams, streams, currentUserId, isSignedIn }) => {
           {renderButtons(stream)}
           <i className='large middle alinged icon camera' />
           <div className='content'>
-            {stream.title}
+            <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
             <div className='description'>{stream.description}</div>
           </div>
         </div>
