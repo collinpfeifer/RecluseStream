@@ -10,10 +10,18 @@ const StreamShow = ({ match, fetchStream, stream }) => {
   useEffect(() => {
     fetchStream(match.params.id);
     buildPlayer();
+
+    return () => {
+      player.destroy();
+    };
   }, []);
 
   useEffect(() => {
     buildPlayer();
+
+    return () => {
+      player.destroy();
+    };
   }, [stream]);
 
   const buildPlayer = () => {
