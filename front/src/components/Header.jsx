@@ -6,12 +6,10 @@ const Header = () => {
   return (
     <div className='ui secondary pointing menu'>
       <Link to='/' className='item'>
-        Streamy
+        <i style={{ fontSize: '1.3em', paddingRight:'10%'}} className='fas fa-spider' />
+        Recluse Stream
       </Link>
       <div className='right menu'>
-        <Link to='/' className='item'>
-          All streams
-        </Link>
         <GoogleAuth />
       </div>
     </div>
