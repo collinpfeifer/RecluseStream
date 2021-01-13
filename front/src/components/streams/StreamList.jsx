@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchStreams } from '../../actions';
+import { motion } from 'framer-motion';
 
 const StreamList = ({ fetchStreams, streams, currentUserId, isSignedIn }) => {
   useEffect(() => {
@@ -41,14 +42,23 @@ const StreamList = ({ fetchStreams, streams, currentUserId, isSignedIn }) => {
   const renderList = () => {
     return streams.map((stream) => {
       return (
-        <div className='item' key={stream.id}>
-          {renderButtons(stream)}
-          <i className='large middle alinged icon camera' />
-          <div className='content'>
-            <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
-            <div className='description'>{stream.description}</div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ rotate: 360, scale: 1 }}
+          transition={{
+            type: 'spring',
+            stiffness: 260,
+            damping: 20,
+          }}>
+          <div className='item' key={stream.id}>
+            {renderButtons(stream)}
+            <i className='large middle alinged icon camera' />
+            <div className='content'>
+              <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
+              <div className='description'>{stream.description}</div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       );
     });
   };
